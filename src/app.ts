@@ -61,7 +61,7 @@ AppDataSource.initialize()
 
       res.status(200).json({
         status: 'success',
-        message: 'Welcome to Node.js, we are happy to see you',
+        message: 'Bem-vindo a API do ProjectMate, estamos felizes em vê-lo',
       });
     });
 
