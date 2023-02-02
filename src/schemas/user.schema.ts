@@ -4,34 +4,34 @@ import { RoleEnumType } from '../entities/user.entity';
 export const createUserSchema = object({
   body: object({
     name: string({
-      required_error: 'Name is required',
+      required_error: 'O nome é obrigatório',
     }),
     email: string({
-      required_error: 'Email address is required',
-    }).email('Invalid email address'),
+      required_error: 'É necessário um endereço de e-mail',
+    }).email('Endereço de email invalido'),
     password: string({
-      required_error: 'Password is required',
+      required_error: 'A senha é obrigatória',
     })
-      .min(8, 'Password must be more than 8 characters')
-      .max(32, 'Password must be less than 32 characters'),
+      .min(3, 'A senha deve ter mais de 3 caracteres')
+      .max(8, 'A senha deve ter menos de 8 caracteres'),
     passwordConfirm: string({
-      required_error: 'Please confirm your password',
+      required_error: 'Por favor, confirme sua senha',
     }),
     role: z.optional(z.nativeEnum(RoleEnumType)),
   }).refine((data) => data.password === data.passwordConfirm, {
     path: ['passwordConfirm'],
-    message: 'Passwords do not match',
+    message: 'As senhas não coincidem',
   }),
 });
 
 export const loginUserSchema = object({
   body: object({
     email: string({
-      required_error: 'Email address is required',
-    }).email('Invalid email address'),
+      required_error: 'É necessário um endereço de e-mai',
+    }).email('Endereço de email invalido'),
     password: string({
-      required_error: 'Password is required',
-    }).min(8, 'Invalid email or password'),
+      required_error: 'A senha é obrigatória',
+    }).min(3, 'E-mail ou senha inválidos'),
   }),
 });
 
