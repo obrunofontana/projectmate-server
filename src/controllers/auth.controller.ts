@@ -72,7 +72,7 @@ export const registerUserHandler = async (
       res.status(201).json({
         status: 'success',
         message:
-          'An email with a verification code has been sent to your email',
+          'Um e-mail com um código de verificação foi enviado para o seu e-mail',
       });
     } catch (error) {
       newUser.verificationCode = null;
@@ -80,14 +80,14 @@ export const registerUserHandler = async (
 
       return res.status(500).json({
         status: 'error',
-        message: 'There was an error sending email, please try again',
+        message: 'Ocorreu um erro ao enviar o e-mail, tente novamente',
       });
     }
   } catch (err: any) {
     if (err.code === '23505') {
       return res.status(409).json({
         status: 'fail',
-        message: 'User with that email already exist',
+        message: 'O usuário com esse e-mail já existe',
       });
     }
     next(err);
@@ -105,7 +105,7 @@ export const loginUserHandler = async (
 
     // 1. Check if user exist
     if (!user) {
-      return next(new AppError(400, 'Invalid email or password'));
+      return next(new AppError(400, 'E-mail ou senha inválidos'));
     }
 
     // 2.Check if user is verified
@@ -113,14 +113,14 @@ export const loginUserHandler = async (
       return next(
         new AppError(
           401,
-          'You are not verified, check your email to verify your account'
+          'Você não foi verificado, verifique seu e-mail para verificar sua conta'
         )
       );
     }
 
     //3. Check if password is valid
     if (!(await User.comparePasswords(password, user.password))) {
-      return next(new AppError(400, 'Invalid email or password'));
+      return next(new AppError(400, 'E-mail ou senha inválidos'));
     }
 
     // 4. Sign Access and Refresh Tokens
