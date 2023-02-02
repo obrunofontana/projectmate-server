@@ -18,7 +18,7 @@ export default class Email {
   constructor(public user: User, public url: string) {
     this.firstName = user.name.split(' ')[0];
     this.to = user.email;
-    this.from = `Codevo ${config.get<string>('emailFrom')}`;
+    this.from = `ProjectMate ${config.get<string>('emailFrom')}`;
   }
 
   private newTransport() {
@@ -57,13 +57,13 @@ export default class Email {
   }
 
   async sendVerificationCode() {
-    await this.send('verificationCode', 'Your account verification code');
+    await this.send('verificationCode', 'Código de verificação da sua conta');
   }
 
   async sendPasswordResetToken() {
     await this.send(
       'resetPassword',
-      'Your password reset token (valid for only 10 minutes)'
+      'Seu token de redefinição de senha (válido por apenas 10 minutos)'
     );
   }
 }
