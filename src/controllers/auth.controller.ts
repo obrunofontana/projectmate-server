@@ -64,12 +64,12 @@ export const registerUserHandler = async (
     // Send Verification Email
     const redirectUrl = `${config.get<string>(
       'origin'
-    )}/verifyemail/${verificationCode}`;
+    )}/verify-email/${verificationCode}`;
 
     try {
       await new Email(newUser, redirectUrl).sendVerificationCode();
 
-      res.status(201).json({
+      return res.status(201).json({
         status: 'success',
         message:
           'Um e-mail com um código de verificação foi enviado para o seu e-mail',
