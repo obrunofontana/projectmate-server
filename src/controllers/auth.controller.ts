@@ -158,7 +158,7 @@ export const verifyEmailHandler = async (
     const user = await findUser({ verificationCode });
 
     if (!user) {
-      return next(new AppError(401, 'Could not verify email'));
+      return next(new AppError(401, 'Não foi possível verificar o e-mail'));
     }
 
     user.verified = true;
