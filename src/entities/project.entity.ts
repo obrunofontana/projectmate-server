@@ -11,9 +11,6 @@ export class Project extends Model {
   })
   title: string;
 
-  @Column()
-  description: string;
-
   @Column({
     default: '#FFF',
   })
