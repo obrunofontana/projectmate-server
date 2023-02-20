@@ -3,6 +3,8 @@ import { Entity, Column, Index, BeforeInsert, OneToMany } from 'typeorm';
 import bcrypt from 'bcryptjs';
 import Model from './model.entity';
 import { Post } from './post.entity';
+import { Project } from './project.entity';
+import { Task } from './task.entity';
 
 export enum RoleEnumType {
   USER = 'user',
@@ -49,6 +51,12 @@ export class User extends Model {
 
   @OneToMany(() => Post, (post) => post.user)
   posts: Post[];
+
+  @OneToMany(() => Project, (project) => project.creator)
+  projects: Project[];
+
+  @OneToMany(() => Task, (task) => task.creator)
+  tasks: Task[];
 
   @BeforeInsert()
   async hashPassword() {

@@ -61,7 +61,7 @@ AppDataSource.initialize()
 
       res.status(200).json({
         status: 'success',
-        message: 'Bem-vindo a API do ProjectMate, estamos felizes em vê-lo',
+        message: 'Bem-vindo a API do InstantDo, estamos felizes em vê-lo por aqui.',
       });
     });
 

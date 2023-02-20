@@ -22,34 +22,30 @@ export const deserializeUser = async (
     }
 
     if (!access_token) {
-      return next(new AppError(401, 'You are not logged in'));
+      return next(new AppError(401, 'Token inválido'));
     }
 
-    // Validate the access token
     const decoded = verifyJwt<{ sub: string }>(
       access_token,
       'accessTokenPublicKey'
     );
 
     if (!decoded) {
-      return next(new AppError(401, `Invalid token or user doesn't exist`));
+      return next(new AppError(401,  'Token inválido ou usuário não existe.'));
     }
 
-    // Check if the user has a valid session
     const session = await redisClient.get(decoded.sub);
 
     if (!session) {
-      return next(new AppError(401, `Invalid token or session has expired`));
+      return next(new AppError(401, 'Token inválido ou expirado'));
     }
 
-    // Check if the user still exist
     const user = await findUserById(JSON.parse(session).id);
 
     if (!user) {
-      return next(new AppError(401, `Invalid token or session has expired`));
+      return next(new AppError(401, 'Token inválido ou expirado'));
     }
 
-    // Add user to res.locals
     res.locals.user = user;
 
     next();
