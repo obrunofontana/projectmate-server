@@ -5,9 +5,7 @@ import { Task } from './task.entity';
 
 @Entity('taskColumns')
 export class TaskColumn extends Model {
-  @Column({
-    unique: true,
-  })
+  @Column()
   title: string;
 
   @Column({

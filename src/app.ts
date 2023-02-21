@@ -10,6 +10,7 @@ import authRouter from './routes/auth.routes';
 import userRouter from './routes/user.routes';
 import postRouter from './routes/post.routes';
 import projectRouter from './routes/project.routes';
+import taskColumnRouter from './routes/taskColumns.routes';
 import validateEnv from './utils/validateEnv';
 import cluster from 'cluster';
 import os from 'os';
@@ -56,6 +57,7 @@ AppDataSource.initialize()
     app.use('/api/users', userRouter);
     app.use('/api/posts', postRouter);
     app.use('/api/projects', projectRouter);
+    app.use('/api/taskColumns', taskColumnRouter);
 
     // HEALTH CHECKER
     app.get('/api/healthChecker', async (_, res: Response) => {

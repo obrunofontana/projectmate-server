@@ -6,6 +6,7 @@ import {
   getProjectsHandler,
   updateProjectHandler,
 } from '../controllers/project.controller';
+import { getTaskColumnsHandler } from '../controllers/taskColumn.controller';
 import { deserializeUser } from '../middleware/deserializeUser';
 import { requireUser } from '../middleware/requireUser';
 import { validate } from '../middleware/validate';
@@ -32,5 +33,9 @@ router
   .get(validate(getProjectSchema), getProjectHandler)
   .patch(validate(updateProjectSchema), updateProjectHandler)
   .delete(validate(deleteProjectSchema), deleteProjectHandler);
+
+router
+  .route('/:projectId/taskColumns')
+  .get(validate(getProjectSchema), getTaskColumnsHandler)
 
 export default router;
