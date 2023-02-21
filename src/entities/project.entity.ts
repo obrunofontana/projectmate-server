@@ -1,10 +1,10 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
-import Model from './model.entity';
-import { Task } from './task.entity';
-import { TaskColumn } from './taskColumn.entity';
-import { User } from './user.entity';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from "typeorm";
+import Model from "./model.entity";
+import { Task } from "./task.entity";
+import { TaskColumn } from "./taskColumn.entity";
+import { User } from "./user.entity";
 
-@Entity('projects')
+@Entity("projects")
 export class Project extends Model {
   @Column({
     unique: true,
@@ -12,9 +12,12 @@ export class Project extends Model {
   title: string;
 
   @Column({
-    default: '#FFF',
+    default: "#FFF",
   })
   color: string;
+
+  @Column({ nullable: true })
+  alias?: string;
 
   @Column({
     default: false,
