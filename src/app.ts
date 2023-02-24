@@ -11,6 +11,7 @@ import userRouter from './routes/user.routes';
 import postRouter from './routes/post.routes';
 import projectRouter from './routes/project.routes';
 import taskColumnRouter from './routes/taskColumns.routes';
+import taskRouter from './routes/task.routes';
 import validateEnv from './utils/validateEnv';
 import cluster from 'cluster';
 import os from 'os';
@@ -58,14 +59,15 @@ AppDataSource.initialize()
     app.use('/api/posts', postRouter);
     app.use('/api/projects', projectRouter);
     app.use('/api/taskColumns', taskColumnRouter);
+    app.use('/api/tasks', taskRouter);
 
     // HEALTH CHECKER
-    app.get('/api/healthChecker', async (_, res: Response) => {
+    app.get('/api/ping', async (_, res: Response) => {
       // const message = await redisClient.get('try');
 
-      res.status(200).json({
+      return res.status(200).json({
         status: 'success',
-        message: 'Bem-vindo a API do InstantDo, estamos felizes em vê-lo por aqui.',
+        message: 'pong',
       });
     });
 
@@ -80,7 +82,7 @@ AppDataSource.initialize()
         error.status = error.status || 'error';
         error.statusCode = error.statusCode || 500;
 
-        res.status(error.statusCode).json({
+        return res.status(error.statusCode).json({
           status: error.status,
           message: error.message,
         });
