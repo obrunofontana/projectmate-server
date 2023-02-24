@@ -9,7 +9,7 @@ import { TaskColumn } from "../entities/taskColumn.entity";
 import { User } from "../entities/user.entity";
 import { AppDataSource } from "../utils/data-source";
 
-const taskRepository = AppDataSource.getRepository(Task);
+export const taskRepository = AppDataSource.getRepository(Task);
 
 export const createTask = async (
   input: Partial<Task>,

@@ -5,7 +5,7 @@ import redisClient from '../utils/connectRedis';
 import { AppDataSource } from '../utils/data-source';
 import { signJwt } from '../utils/jwt';
 
-const userRepository = AppDataSource.getRepository(User);
+export const userRepository = AppDataSource.getRepository(User);
 
 export const createUser = async (input: Partial<User>) => {
   return await userRepository.save(userRepository.create(input));

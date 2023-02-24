@@ -7,7 +7,7 @@ import { TaskColumn } from '../entities/taskColumn.entity';
 import { Project } from '../entities/project.entity'
 import { AppDataSource } from '../utils/data-source';
 
-const taskColumnRepository = AppDataSource.getRepository(TaskColumn);
+export const taskColumnRepository = AppDataSource.getRepository(TaskColumn);
 
 export const createTaskColumn = async (input: Partial<TaskColumn>, project: Project) => {
   return await taskColumnRepository.save(taskColumnRepository.create({ ...input, project }));

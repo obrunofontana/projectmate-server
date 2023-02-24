@@ -4,6 +4,12 @@ import { Task } from "./task.entity";
 import { TaskColumn } from "./taskColumn.entity";
 import { User } from "./user.entity";
 
+export enum ProjectStatus {
+  ACTIVE = "active",
+  INACTIVE = "inactive",
+  ARCHIVED = "archived",
+}
+
 @Entity("projects")
 export class Project extends Model {
   @Column({
@@ -23,6 +29,13 @@ export class Project extends Model {
     default: false,
   })
   public: boolean;
+
+  @Column({
+    type: "enum",
+    enum: ProjectStatus,
+    default: ProjectStatus.ACTIVE,
+  })
+  status: ProjectStatus;
 
   @ManyToOne(() => User, (user) => user.projects)
   @JoinColumn()
