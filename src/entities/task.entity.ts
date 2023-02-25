@@ -29,23 +29,4 @@ export class Task extends Model {
   @ManyToOne(() => Project, (project) => project.tasks)
   @JoinColumn()
   project: Project;
-
-  @BeforeInsert()
-  async updateOrder() {
-    console.log('taskColumn', this.taskColumn.id)
-    
-    const task = await taskRepository
-      .createQueryBuilder('tasks')
-      .select('order')
-      .where('taskColumnId = :taskColumnId', { taskColumnId: this.taskColumn.id })
-      .orderBy('order', 'DESC')
-      .getRawOne();
-
-    console.log('task', task)
-    if (task) {
-      this.order = task.order + 1;
-    } else {
-      this.order = 0
-    }
-  }
 }
