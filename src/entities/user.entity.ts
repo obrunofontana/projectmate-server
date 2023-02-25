@@ -2,7 +2,6 @@ import crypto from 'crypto';
 import { Entity, Column, Index, BeforeInsert, OneToMany } from 'typeorm';
 import bcrypt from 'bcryptjs';
 import Model from './model.entity';
-import { Post } from './post.entity';
 import { Project } from './project.entity';
 import { Task } from './task.entity';
 
@@ -48,9 +47,6 @@ export class User extends Model {
     nullable: true,
   })
   verificationCode!: string | null;
-
-  @OneToMany(() => Post, (post) => post.user)
-  posts: Post[];
 
   @OneToMany(() => Project, (project) => project.creator)
   projects: Project[];
